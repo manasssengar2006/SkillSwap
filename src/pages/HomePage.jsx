@@ -1,0 +1,143 @@
+import { motion } from "framer-motion";
+import FloatingSkills from "../components/FloatingSkills";
+
+export default function HomePage({ setPage }) {
+
+return (
+
+<div className=" relative overflow-hidden">
+
+<FloatingSkills/>
+
+
+
+
+{/* Animated Grid Background */}
+
+<div className="absolute inset-0 -z-20 opacity-10">
+
+<div className="h-full w-full bg-[linear-gradient(to_right,#ffffff0d_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0d_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+
+</div>
+
+
+<section className="min-h-screen flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
+
+
+{/* Badge */}
+
+<motion.div
+initial={{opacity:0,y:-20}}
+animate={{opacity:1,y:0}}
+transition={{duration:0.6}}
+className="mb-6 px-4 py-1 text-xs tracking-wide bg-white/5 border border-white/10 rounded-full text-gray-300"
+>
+
+🎓 Built for students • Learn, earn & collaborate
+
+</motion.div>
+
+
+{/* Headline */}
+
+<motion.h1
+initial={{opacity:0,y:40}}
+animate={{opacity:1,y:0}}
+transition={{duration:0.7}}
+className="text-5xl md:text-6xl leading-tight"
+>
+
+Turn your campus skills into
+<br/>
+
+<span
+className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent "
+style={{ fontFamily: "Playfair Display, serif" }}
+>
+REAL OPPORTUNITIES
+</span>
+
+</motion.h1>
+
+
+{/* Description */}
+
+<motion.p
+initial={{opacity:0}}
+animate={{opacity:1}}
+transition={{delay:0.3,duration:0.7}}
+className="text-gray-400 mt-6 max-w-2xl text-md leading-relaxed"
+>
+
+SkillSwap is a student-powered micro-marketplace where you can 
+<strong className="text-white"> sell what you know and find what you need.</strong>
+
+Whether it's debugging code, tutoring calculus, sharing notes, designing interfaces, 
+or teaching a language — connect with talented students across campuses and exchange knowledge effortlessly.
+
+</motion.p>
+
+
+{/* Buttons */}
+
+<motion.div
+initial={{opacity:0,y:20}}
+animate={{opacity:1,y:0}}
+transition={{delay:0.5}}
+className="flex gap-4 mt-10 flex-wrap justify-center"
+>
+
+<button
+onClick={()=>setPage("browse")}
+className="bg-emerald-400 hover:bg-emerald-300 text-black px-8 py-3 rounded-xl font-medium transition shadow-lg shadow-emerald-400/20"
+>
+
+Browse Skills
+
+</button>
+
+<button
+onClick={()=>setPage("sell")}
+className="border border-white/20 hover:border-white/40 px-8 py-3 rounded-xl text-gray-200 transition"
+>
+
+Sell Your Skill
+
+</button>
+
+</motion.div>
+
+
+{/* Stats */}
+
+<motion.div
+initial={{opacity:0}}
+animate={{opacity:1}}
+transition={{delay:0.7}}
+className="grid grid-cols-3 gap-10 mt-20 text-center text-sm text-gray-400"
+>
+
+<div>
+<p className="text-2xl font-semibold text-white">2,400+</p>
+<p>Student Sellers</p>
+</div>
+
+<div>
+<p className="text-2xl font-semibold text-white">9,000+</p>
+<p>Skills Exchanged</p>
+</div>
+
+<div>
+<p className="text-2xl font-semibold text-white">50+</p>
+<p>Universities</p>
+</div>
+
+</motion.div>
+
+</section>
+
+</div>
+
+)
+
+}
