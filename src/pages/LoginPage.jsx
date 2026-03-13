@@ -1,14 +1,18 @@
 import { useState } from "react"
+import { motion } from "framer-motion"
 import API from "../api/api"
 
 export default function LoginPage({ role, setPage, setUser }) {
 
 const [email,setEmail] = useState("")
 const [password,setPassword] = useState("")
+const [loading,setLoading] = useState(false)
 
 async function login(){
 
 try{
+
+setLoading(true)
 
 const res = await API.post("/auth/login",{
 email,
@@ -27,56 +31,95 @@ setPage("home")
 
 }catch(err){
 alert("Login failed")
+}finally{
+setLoading(false)
 }
 
 }
 
 return(
 
-<div className="min-h-screen flex items-center justify-center">
+<div className="min-h-screen flex items-center justify-center px-6">
 
-<div className="bg-white/5 border border-white/10 p-10 rounded-2xl w-[420px]">
+<motion.div
+initial={{opacity:0,y:40}}
+animate={{opacity:1,y:0}}
+transition={{duration:0.5}}
+className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-3xl w-full max-w-md shadow-2xl"
+>
 
-<h2 className="text-xl mb-6 text-center">
-Login as <span className="text-emerald-400">{role}</span>
+{/* Glow */}
+<div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-400/20 blur-3xl rounded-full"></div>
+
+{/* Title */}
+
+<h2 className="text-2xl font-semibold mb-2 text-center">
+Login as
 </h2>
+
+<p className="text-center text-emerald-400 mb-8 text-lg font-medium">
+{role}
+</p>
+
+
+{/* Email */}
 
 <input
 placeholder="Email"
 value={email}
 onChange={(e)=>setEmail(e.target.value)}
-className="w-full p-3 mb-4 bg-black/40 border border-white/10 rounded-lg"
+className="w-full p-3 mb-4 bg-black/40 border border-white/10 rounded-xl focus:outline-none focus:border-emerald-400 transition"
 />
+
+
+{/* Password */}
 
 <input
 placeholder="Password"
 type="password"
 value={password}
 onChange={(e)=>setPassword(e.target.value)}
-className="w-full p-3 mb-6 bg-black/40 border border-white/10 rounded-lg"
+className="w-full p-3 mb-6 bg-black/40 border border-white/10 rounded-xl focus:outline-none focus:border-emerald-400 transition"
 />
+
+
+{/* Login Button */}
 
 <button
 onClick={login}
-className="w-full bg-emerald-400 text-black py-3 rounded-xl"
+disabled={loading}
+className="w-full bg-emerald-400 hover:bg-emerald-300 text-black py-3 rounded-xl font-medium transition flex items-center justify-center gap-2"
 >
-Login
+
+{loading ? (
+
+<motion.div
+animate={{rotate:360}}
+transition={{repeat:Infinity,duration:1,ease:"linear"}}
+className="w-5 h-5 border-2 border-black border-t-transparent rounded-full"
+/>
+
+) : "Login"}
+
 </button>
 
-<p className="text-sm text-gray-400 mt-4 text-center">
+
+{/* Register */}
+
+<p className="text-sm text-gray-400 mt-6 text-center">
 
 Don't have an account?
 
 <button
 onClick={()=>setPage("register")}
-className="ml-2 text-emerald-400"
+className="ml-2 text-emerald-400 hover:text-emerald-300 transition"
 >
 Register
 </button>
 
 </p>
 
-</div>
+</motion.div>
 
 </div>
 
