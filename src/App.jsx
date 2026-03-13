@@ -91,6 +91,7 @@ setPage={setPage}
 cartItems={cartItems}
 page={page}
 user={user}
+setUser={setUser}
 />
 
 
