@@ -198,10 +198,11 @@ Register
 
 <button
 onClick={()=>{
-localStorage.removeItem("token")
-window.location.reload()
+  localStorage.removeItem("token")
+  setUser(null)
+  setPage("home")
 }}
-className="text-red-400"
+className="text-xs text-red-400"
 >
 Logout
 </button>
