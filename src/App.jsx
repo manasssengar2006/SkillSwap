@@ -11,7 +11,7 @@ import SellSkillPage from "./pages/SellSkillPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
-import { INITIAL_SKILLS } from "./data/skills";
+import { INITIAL_SKILLS } from "<div className="src"></div>/data/skills";
 
 export default function App(){
 
