@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import FloatingIcons from "../components/FloatingIcons"
+import FloatingIcons from "../components/FloatingIcons";
 
 export default function HomePage({ setPage }) {
 
@@ -13,13 +13,11 @@ return (
 {/* Grid Background */}
 
 <div className="absolute inset-0 z-0 opacity-10">
-
 <div className="h-full w-full bg-[linear-gradient(to_right,#ffffff0d_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0d_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-
 </div>
 
 
-<section className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
+<section className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-6xl mx-auto">
 
 
 {/* Badge */}
@@ -28,11 +26,9 @@ return (
 initial={{opacity:0,y:-20}}
 animate={{opacity:1,y:0}}
 transition={{duration:0.6}}
-className="mb-6 px-4 py-1 text-xs tracking-wide bg-white/5 border border-white/10 rounded-full text-gray-300"
+className="mb-6 px-4 py-1 text-xs sm:text-sm tracking-wide bg-white/5 border border-white/10 rounded-full text-gray-300"
 >
-
 🎓 Built for students • Learn, earn & collaborate
-
 </motion.div>
 
 
@@ -42,7 +38,7 @@ className="mb-6 px-4 py-1 text-xs tracking-wide bg-white/5 border border-white/1
 initial={{opacity:0,y:40}}
 animate={{opacity:1,y:0}}
 transition={{duration:0.7}}
-className="text-5xl md:text-6xl leading-tight"
+className="text-3xl sm:text-4xl md:text-6xl leading-tight"
 >
 
 Turn your campus skills into
@@ -64,7 +60,7 @@ REAL OPPORTUNITIES
 initial={{opacity:0}}
 animate={{opacity:1}}
 transition={{delay:0.3,duration:0.7}}
-className="text-gray-400 mt-6 max-w-2xl text-md leading-relaxed"
+className="text-gray-400 mt-6 max-w-2xl text-sm sm:text-base leading-relaxed"
 >
 
 SkillSwap is a student-powered micro-marketplace where you can 
@@ -82,25 +78,21 @@ or teaching a language — connect with talented students across campuses and ex
 initial={{opacity:0,y:20}}
 animate={{opacity:1,y:0}}
 transition={{delay:0.5}}
-className="flex gap-4 mt-10 flex-wrap justify-center"
+className="flex flex-col sm:flex-row gap-4 mt-10 w-full sm:w-auto justify-center"
 >
 
 <button
 onClick={()=>setPage("browse")}
-className="bg-emerald-400 hover:bg-emerald-300 text-black px-8 py-3 rounded-xl font-medium transition shadow-lg shadow-emerald-400/20"
+className="bg-emerald-400 hover:bg-emerald-300 text-black px-8 py-3 rounded-xl font-medium transition shadow-lg shadow-emerald-400/20 w-full sm:w-auto"
 >
-
 Browse Skills
-
 </button>
 
 <button
 onClick={()=>setPage("sell")}
-className="border border-white/20 hover:border-white/40 px-8 py-3 rounded-xl text-gray-200 transition"
+className="border border-white/20 hover:border-white/40 px-8 py-3 rounded-xl text-gray-200 transition w-full sm:w-auto"
 >
-
 Sell Your Skill
-
 </button>
 
 </motion.div>
@@ -112,7 +104,7 @@ Sell Your Skill
 initial={{opacity:0}}
 animate={{opacity:1}}
 transition={{delay:0.7}}
-className="grid grid-cols-3 gap-10 mt-20 text-center text-sm text-gray-400"
+className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 mt-16 sm:mt-20 text-center text-sm text-gray-400 w-full"
 >
 
 <div>
@@ -137,5 +129,4 @@ className="grid grid-cols-3 gap-10 mt-20 text-center text-sm text-gray-400"
 </div>
 
 )
-
 }
