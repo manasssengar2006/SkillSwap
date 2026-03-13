@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-export default function Navbar({ setPage, cartItems, page, user,setUser }) {
+export default function Navbar({ setPage, cartItems, page, user, setUser }) {
 
 const [menuOpen,setMenuOpen] = useState(false)
 
@@ -10,6 +10,13 @@ const links = [
 { name:"Browse", id:"browse" },
 { name:"Sell", id:"sell" }
 ]
+
+const logout = () => {
+  localStorage.removeItem("token")
+  setUser(null)
+  setPage("home")
+  setMenuOpen(false)
+}
 
 return(
 
@@ -65,7 +72,7 @@ className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-white
 
 🛒
 
-{cartItems.length>0 && (
+{cartItems?.length > 0 && (
 
 <span className="absolute -top-1 -right-1 text-[10px] bg-emerald-400 text-black px-[6px] rounded-full">
 {cartItems.length}
@@ -109,10 +116,7 @@ Register
 </span>
 
 <button
-onClick={()=>{
-localStorage.removeItem("token")
-window.location.reload()
-}}
+onClick={logout}
 className="text-xs text-red-400 hover:text-red-300"
 >
 Logout
@@ -197,15 +201,12 @@ Register
 <span className="text-gray-300">{user.name}</span>
 
 <button
-onClick={()=>{
-  localStorage.removeItem("token")
-  setUser(null)
-  setPage("home")
-}}
+onClick={logout}
 className="text-xs text-red-400"
 >
 Logout
 </button>
+
 </>
 
 )}
