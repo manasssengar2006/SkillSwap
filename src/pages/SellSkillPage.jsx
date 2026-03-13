@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { CATEGORIES } from "../data/categories";
+import { CATEGORIES } from "../Data/categories";
 
 export default function SellSkillPage({ setPage, addSkill }) {
 
