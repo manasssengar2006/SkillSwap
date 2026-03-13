@@ -1,27 +1,25 @@
 import { motion } from "framer-motion";
-import FloatingSkills from "../components/FloatingSkills";
+import FloatingIcons from "../components/FloatingIcons"
 
 export default function HomePage({ setPage }) {
 
 return (
 
-<div className=" relative overflow-hidden">
+<div className="relative overflow-hidden">
 
-<FloatingSkills/>
+{/* Floating Icons */}
+<FloatingIcons/>
 
+{/* Grid Background */}
 
-
-
-{/* Animated Grid Background */}
-
-<div className="absolute inset-0 -z-20 opacity-10">
+<div className="absolute inset-0 z-0 opacity-10">
 
 <div className="h-full w-full bg-[linear-gradient(to_right,#ffffff0d_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0d_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
 </div>
 
 
-<section className="min-h-screen flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
+<section className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-6 max-w-5xl mx-auto">
 
 
 {/* Badge */}
@@ -51,7 +49,7 @@ Turn your campus skills into
 <br/>
 
 <span
-className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent "
+className="bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 bg-clip-text text-transparent"
 style={{ fontFamily: "Playfair Display, serif" }}
 >
 REAL OPPORTUNITIES

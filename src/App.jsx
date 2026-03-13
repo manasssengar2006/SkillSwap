@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 
 import Navbar from "./components/Navbar";
@@ -7,47 +7,132 @@ import PageWrapper from "./components/PageWrapper";
 import HomePage from "./pages/HomePage";
 import BrowsePage from "./pages/BrowsePage";
 import CartPage from "./pages/CartPage";
-import { INITIAL_SKILLS } from "./data/skills";
 import SellSkillPage from "./pages/SellSkillPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+
+import { INITIAL_SKILLS } from "./data/skills";
 
 export default function App(){
 
-const[page,setPage]=useState("home")
+const [page,setPage] = useState("home");
+const [role,setRole] = useState(null);
+const [user,setUser] = useState(null);
 
-const[skills,setSkills]=useState(INITIAL_SKILLS)
-const removeFromCart = (id) => {
-setCartItems(cartItems.filter(item => item.id !== id))
+const [skills,setSkills] = useState(INITIAL_SKILLS);
+const [cartItems,setCartItems] = useState([]);
+
+
+/* -----------------------------
+Load user from localStorage
+------------------------------ */
+
+useEffect(()=>{
+
+const savedUser = localStorage.getItem("user");
+
+if(savedUser){
+setUser(JSON.parse(savedUser));
 }
-const[cartItems,setCartItems]=useState([])
-const addSkill = (skill) => {
-  setSkills([skill, ...skills]);
-};
 
-const addToCart=(skill)=>{
+},[]);
 
-setCartItems([...cartItems,skill])
+
+/* -----------------------------
+Add skill (seller)
+------------------------------ */
+
+function addSkill(skill){
+
+setSkills(prev => [skill,...prev]);
 
 }
+
+
+/* -----------------------------
+Add to cart
+Requires login
+------------------------------ */
+
+function addToCart(skill){
+
+if(!user){
+setPage("login");
+return;
+}
+
+setCartItems(prev => [...prev,skill]);
+
+}
+
+
+/* -----------------------------
+Remove from cart
+------------------------------ */
+
+function removeFromCart(id){
+
+setCartItems(prev =>
+prev.filter(item => item.id !== id)
+);
+
+}
+
 
 return(
 
-<div>
+<div className="min-h-screen bg-black text-white">
+
+
+{/* Navbar */}
 
 <Navbar
 setPage={setPage}
 cartItems={cartItems}
+page={page}
+user={user}
 />
+
+
+{/* Page Transitions */}
 
 <AnimatePresence mode="wait">
 
-{page==="home" &&
+
+{/* HOME */}
+
+{page === "home" && (
 
 <PageWrapper key="home">
+
 <HomePage setPage={setPage}/>
+
 </PageWrapper>
 
-}
-{page==="cart" &&
+)}
+
+
+
+{/* BROWSE */}
+
+{page === "browse" && (
+
+<PageWrapper key="browse">
+
+<BrowsePage
+skills={skills}
+addToCart={addToCart}
+/>
+
+</PageWrapper>
+
+)}
+
+
+
+{/* CART */}
+
+{page === "cart" && (
 
 <PageWrapper key="cart">
 
@@ -59,19 +144,13 @@ setPage={setPage}
 
 </PageWrapper>
 
-}
+)}
 
-{page==="browse" &&
 
-<PageWrapper key="browse">
-<BrowsePage
-skills={skills}
-addToCart={addToCart}
-/>
-</PageWrapper>
 
-}
-{page==="sell" &&
+{/* SELL SKILL */}
+
+{page === "sell" && (
 
 <PageWrapper key="sell">
 
@@ -82,7 +161,48 @@ addSkill={addSkill}
 
 </PageWrapper>
 
-}
+)}
+
+
+
+{/* LOGIN */}
+
+{page === "login" && (
+
+<PageWrapper key="login">
+
+<LoginPage
+role={role}
+setUser={(u)=>{
+
+setUser(u);
+localStorage.setItem("user",JSON.stringify(u));
+
+}}
+setPage={setPage}
+/>
+
+</PageWrapper>
+
+)}
+
+
+
+{/* REGISTER */}
+
+{page === "register" && (
+
+<PageWrapper key="register">
+
+<RegisterPage
+role={role}
+setPage={setPage}
+/>
+
+</PageWrapper>
+
+)}
+
 
 </AnimatePresence>
 
