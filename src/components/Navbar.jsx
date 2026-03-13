@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-export default function Navbar({ setPage, cartItems, page, user }) {
+export default function Navbar({ setPage, cartItems, page, user,setUser }) {
 
 const [menuOpen,setMenuOpen] = useState(false)
 
