@@ -17,7 +17,7 @@ return (
 </div>
 
 
-<section className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-6xl mx-auto">
+<section className="relative z-20 min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-6xl mx-auto pt-28">
 
 
 {/* Badge */}

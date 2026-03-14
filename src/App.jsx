@@ -10,6 +10,8 @@ import CartPage from "./pages/CartPage";
 import SellSkillPage from "./pages/SellSkillPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import BuyerDashboard from "./pages/BuyerDashboard"
+import SellerDashboard from "./pages/SellerDashboard"
 
 import { INITIAL_SKILLS } from "./Data/skills.js";
 
@@ -128,6 +130,8 @@ addToCart={addToCart}
 </PageWrapper>
 
 )}
+{page==="buyerDashboard" && <BuyerDashboard setPage={setPage} />}
+{page==="sellerDashboard" && <SellerDashboard setPage={setPage} />}
 
 
 

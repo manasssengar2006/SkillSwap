@@ -1,11 +1,13 @@
+
 import { useState } from "react"
 import { motion } from "framer-motion"
 import API from "../api/api"
 
-export default function LoginPage({ role, setPage, setUser }) {
+export default function LoginPage({ setPage, setUser }) {
 
 const [email,setEmail] = useState("")
 const [password,setPassword] = useState("")
+const [role,setRole] = useState("buyer")
 const [loading,setLoading] = useState(false)
 
 async function login(){
@@ -23,10 +25,10 @@ localStorage.setItem("token",res.data.token)
 
 setUser(res.data.user)
 
-if(res.data.user.role==="seller"){
-setPage("dashboard")
+if(res.data.user.role === "seller"){
+setPage("sellerDashboard")
 }else{
-setPage("home")
+setPage("buyerDashboard")
 }
 
 }catch(err){
@@ -39,7 +41,7 @@ setLoading(false)
 
 return(
 
-<div className="min-h-screen flex items-center justify-center px-6">
+<div className="min-h-screen flex items-center justify-center px-6 bg-[#0f172a]">
 
 <motion.div
 initial={{opacity:0,y:40}}
@@ -48,18 +50,63 @@ transition={{duration:0.5}}
 className="relative bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-3xl w-full max-w-md shadow-2xl"
 >
 
-{/* Glow */}
-<div className="absolute -top-20 left-1/2 -translate-x-1/2 w-64 h-64 bg-emerald-400/20 blur-3xl rounded-full"></div>
+{/* Glow Background */}
 
-{/* Title */}
+<div className="absolute -top-24 left-1/2 -translate-x-1/2 w-72 h-72 bg-emerald-400/20 blur-3xl rounded-full"></div>
 
-<h2 className="text-2xl font-semibold mb-2 text-center">
-Login as
+<h2 className="text-3xl font-semibold text-center mb-6">
+Login
 </h2>
 
-<p className="text-center text-emerald-400 mb-8 text-lg font-medium">
-{role}
+
+{/* Role Selector */}
+
+<p className="text-sm text-gray-400 mb-3 text-center">
+Login as
 </p>
+
+<div className="grid grid-cols-2 gap-4 mb-6">
+
+{/* Buyer */}
+
+<div
+onClick={()=>setRole("buyer")}
+className={`cursor-pointer p-4 rounded-xl border transition
+${role==="buyer"
+? "border-emerald-400 bg-emerald-400/10"
+: "border-white/10 hover:border-emerald-300"}
+`}
+>
+
+<h3 className="font-semibold mb-1">🛒 Buyer</h3>
+
+<p className="text-xs text-gray-400">
+Purchase skills
+</p>
+
+</div>
+
+
+{/* Seller */}
+
+<div
+onClick={()=>setRole("seller")}
+className={`cursor-pointer p-4 rounded-xl border transition
+${role==="seller"
+? "border-emerald-400 bg-emerald-400/10"
+: "border-white/10 hover:border-emerald-300"}
+`}
+>
+
+<h3 className="font-semibold mb-1">💼 Seller</h3>
+
+<p className="text-xs text-gray-400">
+Sell your skills
+</p>
+
+</div>
+
+</div>
 
 
 {/* Email */}
@@ -126,3 +173,4 @@ Register
 )
 
 }
+
